@@ -26,7 +26,7 @@ $.fn.tip = function(options) {
 			timer = setTimeout(function() {
 				active = true;
 				tip(tpl, el);
-			}, 200);
+			}, o.showTime);
 		}
 	});
 
@@ -35,7 +35,7 @@ $.fn.tip = function(options) {
 		clearTimeout(timer);
 		enter = setTimeout(function() {
 			active = false;
-		}, 1000);
+		}, o.hideTime);
 	});
 	
 	return true;
@@ -48,14 +48,14 @@ function tip(tpl, el) {
 		    sl = $(document).scrollLeft(),
 		    st = $(document).scrollTop(),
 		    b = el[0].getBoundingClientRect(),
-				arrow = template.find('.tipArrow');
+		    arrow = template.find('.tipArrow');
 		template.find('.tipContent').text(tip);
 		$('body').append(template);
 		var tb = template[0].getBoundingClientRect(),
 		    w = tb.width, 
 		    h = tb.height,
 		    winW = $(window).width(),
-	     	winH = $(window).height();
+	      winH = $(window).height();
 		var pos = {
 			left: b.left + (b.width/2) - 9,
 			top: b.top-h
