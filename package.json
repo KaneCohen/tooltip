@@ -1,20 +1,20 @@
 {
   "name": "tooltip",
-	"title": "Tooltip"
-  "description": "Tiny and simple jquery tooltip library",
-	"keywords": ["tooltip", "tip", "jquery", "library"],
+  "title": "Tooltip"
+  "description": "Tiny and simple jquery tooltip plugin",
+	"keywords": ["tooltip", "tip", "jquery", "plugin"],
 	"licenses": [
 		"type": "MIT",
 	],
   "authors": [
-		{
-      "name": "Kane Cohen",
-      "email": "kanecohen@gmail.com",
-		},
+	{
+		"name": "Kane Cohen",
+		"email": "kanecohen@gmail.com"
+	}
   ],
-	"repository": {
-		"type": "git",
-		"url": "git://http.com/kanecohen/tooltip.git"
+  "repository": {
+	"type": "git",
+		"url": "https://github.com/KaneCohen/tooltip.git"
 	},
   "minimum-stability": "dev"
 }
