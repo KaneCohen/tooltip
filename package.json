@@ -3,9 +3,6 @@
   "title": "Tooltip"
   "description": "Tiny and simple jquery tooltip plugin",
 	"keywords": ["tooltip", "tip", "jquery", "plugin"],
-	"licenses": [
-		"type": "MIT",
-	],
   "authors": [
 	{
 		"name": "Kane Cohen",

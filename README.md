@@ -50,5 +50,3 @@ Nothing in options. Use css.
 You don't have to reinitialize plugin every time you add new elements with tooltips to the DOM.
 This plugin binds it's listeners to document, so everything will work just fine. However it may be a negative if you want multiple
 running instances with different options.
-
-License: MIT
