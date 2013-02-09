@@ -2,6 +2,8 @@
 
 ## Tiny simplistic tooltip plugin for jquery
 
+Demo: <http://jsfiddle.net/DNPTx/)>
+
 In order for tooltip to show, you must have a class "tip" on the element AND an attribute data-tip="" 
 which will contain you actual tooltip text:
 
@@ -24,6 +26,16 @@ to the other element with tooltip, tip will show without any delay.
 
 `hideTime: 1000` (default) in milliseconds. This is our cooldown period. When tooltip is in "chill" mode, it won't show
 as soon as your mouse enters element. First, it'll have to go through `showTime` timer.
+
+Use as follows:
+
+````javascript
+$().tip({
+	showTime: 200,
+	hideTime: 1000,
+});
+````
+
 
 -----
 
