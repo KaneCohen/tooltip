@@ -1,7 +1,6 @@
 // Tiny simplistic tooltip plugin for jQuery
-// version 1.0.0
+// version 0.0.1
 // Kane Cohen [KaneCohen@gmail.com] | https://github.com/KaneCohen
-// MIT License
 $.fn.tip = function(options) {
 	var defaults = {
 		showTime: 200,
