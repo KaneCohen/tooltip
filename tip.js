@@ -47,7 +47,7 @@
 			var self = this;
 			$(document).on('mouseenter.tip', this.o.selector, function(e) {
 				var el = $(this);
-				if (! el.data('tip')) {
+				if (! el.data('tip') && el.attr('title')) {
 					el.attr('data-tip', $.trim(el.attr('title')));
 				}
 				el.removeAttr('title');
