@@ -4,7 +4,7 @@
 
 Demo: <http://jsfiddle.net/DNPTx/>
 
-In order for tooltip to show, you must have a class "tip" on the element AND an attribute data-tip="" 
+In order for tooltip to show, you must have a class "tip" on the element AND an attribute data-tip=""
 which will contain you actual tooltip text:
 
 ````html
