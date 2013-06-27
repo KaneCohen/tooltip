@@ -37,8 +37,8 @@
 				y: false
 			}
 		},
-		init: function() {
-			this.o = $.extend({}, this.d);
+		init: function(o) {
+			this.o = $.extend({}, this.d, o);
 			this.v = $.extend({}, this.dv);
 			this.initEvents();
 		},
@@ -47,6 +47,10 @@
 			var self = this;
 			$(document).on('mouseenter.tip', this.o.selector, function(e) {
 				var el = $(this);
+				if (! el.data('tip')) {
+					el.attr('data-tip', $.trim(el.attr('title')));
+				}
+				el.removeAttr('title');
 				$('#tip').remove();
 				clearTimeout(self.v.timer);
 				clearTimeout(self.v.enter);
@@ -74,10 +78,10 @@
 			var self = this,
 			    o    = this.o,
 			    v    = this.v,
-			    tip  = $.trim(el.attr('data-tip')),
-			    follow   = el.attr('data-tip-follow') || o.follow,
-			    aside    = el.attr('data-tip-aside') || o.aside,
-			    position = el.attr('data-tip-position') || o.position;
+			    tip  = $.trim(el.data('tip')),
+			    follow   = el.data('tipFollow') || o.follow,
+			    aside    = el.data('tipAside') || o.aside,
+			    position = el.data('tipPosition') || o.position;
 
 			if (follow) {
 				v.follow.x = follow.indexOf('x') >= 0;
@@ -86,19 +90,19 @@
 
 			if (tip !== null && tip.length !== 0) {
 				var template = $(self.o.tpl),
-						arrow = template.find('.tipArrow'),
-						winSL = $(window).scrollLeft(),
-						winST = $(window).scrollTop(),
-						winW  = $(window).width(),
-						winH  = $(window).height(),
-						b     = el[0].getBoundingClientRect();
+				    arrow = template.find('.tipArrow'),
+				    winSL = $(window).scrollLeft(),
+				    winST = $(window).scrollTop(),
+				    winW  = $(window).width(),
+				    winH  = $(window).height(),
+				    b     = el[0].getBoundingClientRect();
 
 				template.find('.tipContent').text(tip);
 				$('body').append(template);
 
 				var tb = template[0].getBoundingClientRect(),
-						w  = tb.width,
-						h  = tb.height,
+				    w  = tb.width,
+				    h  = tb.height,
 				    maxX = winW - w,
 				    maxY = winH - h;
 
@@ -108,20 +112,23 @@
 				};
 
 				if (aside || position == 'left' || position == 'right') {
-					p.top = b.top + (b.height/2) - (tb.height/2) + 2;
-					p.left = b.left - tb.width - 5;
+					position = position == 'auto' ? 'right' : position;
+					p.top = b.top + (b.height/2) - (h/2) + 2;
+					p.left = b.right + 5;
 					if (p.left > maxX) {
+						arrow.css({top: (b.height/2)+7});
 						p.left = b.right + 5;
+						position = 'left';
 					} else if (p.left < 0) {
 						arrow.css({top: (b.height/2)+7});
 						p.left = b.right + 5;
-						position = 'right';
 					}
 				} else {
 					if (p.left > maxX) {
 						arrow.css({left: p.left-maxX+5});
 						p.left = maxX;
 					} else if (p.left < 0) {
+						arrow.css({left: p.left-maxX+5});
 						p.left = 0;
 					}
 					if (p.top > maxY) {
@@ -141,14 +148,14 @@
 							p.left = e.pageX-winSL-9;
 						}
 						if (v.follow.y) {
-							p.top = e.pageY-tb.height-winST-4;
+							p.top = e.pageY-h-winST-4;
 						}
 					} else {
 						if (v.follow.x) {
 							p.left = e.pageX-winSL+9;
 						}
 						if (v.follow.y) {
-							p.top = e.pageY-(tb.height/2)-winST;
+							p.top = e.pageY-(h/2)-winST+2;
 						}
 					}
 
@@ -158,14 +165,14 @@
 								p.left = e.pageX-winSL-9;
 							}
 							if (v.follow.y) {
-								p.top = e.pageY-tb.height-winST-4;
+								p.top = e.pageY-h-winST-4;
 							}
 						} else {
 							if (v.follow.x) {
 								p.left = e.pageX-winSL+9;
 							}
 							if (v.follow.y) {
-								p.top = e.pageY-(tb.height/2)-winST;
+								p.top = e.pageY-(h/2)-winST+2;
 							}
 						}
 
