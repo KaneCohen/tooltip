@@ -1,8 +1,8 @@
 # Tooltip
 
-## Tiny simplistic tooltip plugin for jquery
+## Tiny simplistic (not so much anymore) tooltip plugin for jquery
 
-Demo: <http://jsfiddle.net/DNPTx/2/>
+Demo: <http://jsfiddle.net/DNPTx/4/>
 
 In order for tooltip to show, you must have a class "tip" on the element AND an attribute data-tip=""
 which will contain you actual tooltip text:
