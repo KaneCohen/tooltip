@@ -10,10 +10,6 @@
 	font-family: 'Lucida Grande', Tahoma, Verdana, Arial, sans-serif;
 }
 
-#tip.transparent {
-	visibility: hidden;
-}
-
 #tip .tipContent {
 	padding: 4px 8px;
 	background: rgba(0,0,0,0.9);
@@ -26,19 +22,36 @@
 	width: 0;
 	height: 0;
 	position: absolute;
-	left: 5px;
 	border: 4px solid transparent;
+}
+
+#tip.top .tipArrow {
+	left: 5px;
 	border-width: 4px 4px 0;
 	border-top-color: rgba(0,0,0,0.9);
 }
 
-#tip .tipArrow.top {
-	width: 0;
-	height: 0;
-	position: absolute;
+#tip.bottom .tipArrow {
 	left: 5px;
 	top: -4px;
-	border: transparent solid 4px;
+	border: 4px solid transparent;
 	border-width: 0 4px 4px;
 	border-bottom-color: rgba(0,0,0,0.9);
+}
+
+#tip.left .tipArrow {
+	top: 50%;
+	right: -4px;
+	margin-top: -6px;
+	border-width: 4px 0 4px 4px;
+	border-left-color: rgba(0,0,0,0.9);
+}
+
+#tip.right .tipArrow {
+	position: absolute;
+	top: 50%;
+	left: -4px;
+	margin-top: -6px;
+	border-width: 4px 4px 4px 0;
+	border-right-color: rgba(0,0,0,0.9);
 }

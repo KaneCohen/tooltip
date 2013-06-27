@@ -27,13 +27,25 @@ to the other element with tooltip, tip will show without any delay.
 `hideTime: 1000` (default) in milliseconds. This is our cooldown period. When tooltip is in "chill" mode, it won't show
 as soon as your mouse enters element. First, it'll have to go through `showTime` timer.
 
+`aside: true || false` (default). Show tooltip to the left or to the right of the element. 
+`data-tip-aside="true"` - attribute on tipped element to force aside behavior.
+
+`position: 'auto' || 'left' || 'right' || 'top' || 'bottom'`. Force tooltip psoition. 
+`data-tip-position="left"`. Force tooltip position on this element.
+
+`follow: 'x' || 'y' || 'xy' || false`. Tooltip will follow mouse on move based on one or boths axis. 
+`data-tip-follow="x"`. Force tooltip to follow mouse on this element.
+
 Use as follows:
 
 ````javascript
-$().tip({
+$('.tip').tip({
 	showTime: 200,
 	hideTime: 1000,
 });
+
+// Or
+$().tip();
 ````
 
 
@@ -48,5 +60,5 @@ Nothing in options. Use css.
 ## Extra
 
 You don't have to reinitialize plugin every time you add new elements with tooltips to the DOM.
-This plugin binds it's listeners to document, so everything will work just fine. However it may be a negative if you want multiple
+This plugin binds its listeners to document, so everything will work just fine. However it may be a negative if you want multiple
 running instances with different options.
