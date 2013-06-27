@@ -114,13 +114,11 @@
 				if (aside || position == 'left' || position == 'right') {
 					position = position == 'auto' ? 'right' : position;
 					p.top = b.top + (b.height/2) - (h/2) + 2;
-					p.left = b.right + 5;
+					p.left = b.left - w - 5;
 					if (p.left > maxX) {
-						arrow.css({top: (b.height/2)+7});
 						p.left = b.right + 5;
 						position = 'left';
-					} else if (p.left < 0) {
-						arrow.css({top: (b.height/2)+7});
+					} else if (p.left < 0 || position == 'right') {
 						p.left = b.right + 5;
 					}
 				} else {
@@ -128,7 +126,6 @@
 						arrow.css({left: p.left-maxX+5});
 						p.left = maxX;
 					} else if (p.left < 0) {
-						arrow.css({left: p.left-maxX+5});
 						p.left = 0;
 					}
 					if (p.top > maxY) {
