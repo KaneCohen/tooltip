@@ -10,6 +10,11 @@
 	font-family: 'Lucida Grande', Tahoma, Verdana, Arial, sans-serif;
 }
 
+#tip.left,
+#tip.right {
+	padding: 0;
+}
+
 #tip .tipContent {
 	padding: 4px 8px;
 	background: rgba(0,0,0,0.9);
@@ -41,17 +46,16 @@
 
 #tip.left .tipArrow {
 	top: 50%;
-	right: -4px;
 	margin-top: -6px;
+	right: -4px;
 	border-width: 4px 0 4px 4px;
 	border-left-color: rgba(0,0,0,0.9);
 }
 
 #tip.right .tipArrow {
-	position: absolute;
 	top: 50%;
-	left: -4px;
 	margin-top: -6px;
+	left: -4px;
 	border-width: 4px 4px 4px 0;
 	border-right-color: rgba(0,0,0,0.9);
 }

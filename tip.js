@@ -45,7 +45,7 @@
 
 		initEvents: function() {
 			var self = this;
-			$(document).on('mouseenter.tip', this.o.selector, function(e) {
+			$(document).on('mouseover.tip', this.o.selector, function(e) {
 				var el = $(this);
 				if (! el.data('tip') && el.attr('title')) {
 					el.attr('data-tip', $.trim(el.attr('title')));
@@ -57,17 +57,18 @@
 				if (self.v.active) {
 					self.show(e, el);
 				} else {
-					timer = setTimeout(function() {
+					self.v.timer = setTimeout(function() {
 						self.v.active = true;
 						self.show(e, el);
 					}, self.o.showTime);
 				}
 			});
 
-			$(document).on('mouseleave.tip', self.o.selector+', #tip', function(e) {
+			$(document).on('mouseout.tip', self.o.selector+', #tip', function(e) {
 				$(document).off('mousemove.tip');
 				$('#tip').remove();
 				clearTimeout(self.v.timer);
+				clearTimeout(self.v.enter);
 				self.v.enter = setTimeout(function() {
 					self.v.active = false;
 				}, self.o.hideTime);
@@ -105,6 +106,10 @@
 				    h  = tb.height,
 				    maxX = winW - w,
 				    maxY = winH - h;
+				template.css({
+					width: w,
+					height: h
+				});
 
 				var p = {
 					left: b.left + (b.width/2) - 9,
@@ -112,7 +117,7 @@
 				};
 
 				if (aside || position == 'left' || position == 'right') {
-					position = position == 'auto' ? 'right' : position;
+					position = position != 'left' || position != 'right' ? 'right' : position;
 					p.top = b.top + (b.height/2) - (h/2) + 2;
 					p.left = b.left - w - 5;
 					if (p.left > maxX) {
@@ -146,6 +151,7 @@
 						}
 						if (v.follow.y) {
 							p.top = e.pageY-h-winST-4;
+							p.top += p.top < 0 ? h*2 : 0;
 						}
 					} else {
 						if (v.follow.x) {
@@ -163,6 +169,7 @@
 							}
 							if (v.follow.y) {
 								p.top = e.pageY-h-winST-4;
+								p.top += p.top < 0 ? h*2 : 0;
 							}
 						} else {
 							if (v.follow.x) {
