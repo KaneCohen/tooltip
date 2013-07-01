@@ -1,11 +1,17 @@
 // Tiny simplistic tooltip plugin for jQuery
-// version 0.0.3
+// version 0.0.4
 // Kane Cohen [KaneCohen@gmail.com] | https://github.com/KaneCohen
 (function($) {
 	$.fn.tip = function(options) {
-		var o = $.extend(true, {}, options);
+		var args = arguments,
+		    o = $.extend(true, {}, options),
+		    tip = $(document).data('tip');
 		o.selector = this.selector || '.tip';
-		new Tip(o);
+		if (tip) {
+			tip.trigger.apply(tip, args);
+		} else {
+			new Tip(o);
+		}
 		return this;
 	};
 
@@ -41,6 +47,7 @@
 			this.o = $.extend({}, this.d, o);
 			this.v = $.extend({}, this.dv);
 			this.initEvents();
+			$(document).data('tip', this);
 		},
 
 		initEvents: function() {
@@ -64,7 +71,7 @@
 				}
 			});
 
-			$(document).on('mouseout.tip', self.o.selector+', #tip', function(e) {
+			$(document).on('mouseout.tip mousedown.tip', self.o.selector+', #tip', function(e) {
 				$(document).off('mousemove.tip');
 				$('#tip').remove();
 				clearTimeout(self.v.timer);
@@ -187,6 +194,20 @@
 
 				template.css({left: p.left, top: p.top, visibility: 'visible'});
 			}
+		},
+
+		destroy: function() {
+			$(document).off('.tip');
+			$('#tip').remove();
+		},
+
+		trigger: function(name) {
+			var args = Array.prototype.slice.call(arguments, 1);
+			if (this[name]) {
+				if (this[name].apply(this, args) === false)
+					return false;
+			}
+			return true;
 		}
 	};
 
