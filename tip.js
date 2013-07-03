@@ -24,6 +24,7 @@
 		d: {
 			showTime: 200,
 			hideTime: 1000,
+			arrowSize: 5,
 			follow:   false,  // Follow mouse. Values: 'x', 'y', 'xy', false.
 			position: 'auto', // top, bottom, left, right, auto.
 			aside:    false,  // Place tooltip to the left/right based on "position" option. true, false.
@@ -120,22 +121,22 @@
 
 				var p = {
 					left: b.left + (b.width/2) - 9,
-					top:  b.top-h
+					top:  b.top-h-o.arrowSize
 				};
 
 				if (aside || position == 'left' || position == 'right') {
 					position = position != 'left' || position != 'right' ? 'right' : position;
 					p.top = b.top + (b.height/2) - (h/2) + 2;
-					p.left = b.left - w - 5;
+					p.left = b.left - w - o.arrowSize;
 					if (p.left > maxX) {
-						p.left = b.right + 5;
+						p.left = b.right + o.arrowSize;
 						position = 'left';
 					} else if (p.left < 0 || position == 'right') {
-						p.left = b.right + 5;
+						p.left = b.right + o.arrowSize;
 					}
 				} else {
 					if (p.left > maxX) {
-						arrow.css({left: p.left-maxX+5});
+						arrow.css({left: p.left-maxX+o.arrowSize});
 						p.left = maxX;
 					} else if (p.left < 0) {
 						p.left = 0;
@@ -143,7 +144,7 @@
 					if (p.top > maxY) {
 						p.top = maxY;
 					} else if (p.top < 0 || position == 'bottom') {
-						p.top = b.bottom + 4;
+						p.top = b.bottom + o.arrowSize;
 						position = 'bottom';
 					}
 				}
@@ -157,7 +158,7 @@
 							p.left = e.pageX-winSL-9;
 						}
 						if (v.follow.y) {
-							p.top = e.pageY-h-winST-4;
+							p.top = e.pageY-h-winST-9;
 							p.top += p.top < 0 ? h*2 : 0;
 						}
 					} else {
@@ -175,7 +176,7 @@
 								p.left = e.pageX-winSL-9;
 							}
 							if (v.follow.y) {
-								p.top = e.pageY-h-winST-4;
+								p.top = e.pageY-h-winST-9;
 								p.top += p.top < 0 ? h*2 : 0;
 							}
 						} else {
