@@ -1,7 +1,13 @@
 // Tiny simplistic tooltip plugin for jQuery
 // version 0.0.4
 // Kane Cohen [KaneCohen@gmail.com] | https://github.com/KaneCohen
-(function($) {
+(function(factory) {
+	if (typeof define === 'function' && define.amd) {
+		define(['jquery'], factory);
+	} else {
+		factory(jQuery);
+	}
+}(function($) {
 	$.fn.tip = function(options) {
 		var args = arguments,
 		    o = $.extend(true, {}, options),
@@ -27,6 +33,7 @@
 			arrowSize: 5,
 			follow:   false,  // Follow mouse. Values: 'x', 'y', 'xy', false.
 			position: 'auto', // top, bottom, left, right, auto.
+			align:    'right', // center, right
 			aside:    false,  // Place tooltip to the left/right based on "position" option. true, false.
 			selector: '.tip',
 			tpl: '<div id="tip" style="visibility: hidden;">' +
@@ -89,6 +96,7 @@
 			    v    = this.v,
 			    tip  = $.trim(el.data('tip')),
 			    follow   = el.data('tipFollow') || o.follow,
+			    align    = el.data('tipAlign') || o.align,
 			    aside    = el.data('tipAside') || o.aside,
 			    position = el.data('tipPosition') || o.position;
 
@@ -120,7 +128,7 @@
 				});
 
 				var p = {
-					left: b.left + (b.width/2) - 9,
+					left: align == 'right' ? b.left + (b.width/2) - 9 : b.left + (b.width/2) - (tb.width/2),
 					top:  b.top-h-o.arrowSize
 				};
 
@@ -135,6 +143,9 @@
 						p.left = b.right + o.arrowSize;
 					}
 				} else {
+					if (align == 'center') {
+						arrow.css({left: (tb.width/2)-o.arrowSize});
+					}
 					if (p.left > maxX) {
 						arrow.css({left: p.left-maxX+o.arrowSize});
 						p.left = maxX;
@@ -155,7 +166,7 @@
 				if (follow) {
 					if (position == 'top' || position == 'bottom') {
 						if (v.follow.x) {
-							p.left = e.pageX-winSL-9;
+							p.left = align == 'right' ? e.pageX-winSL-9 : e.pageX-winSL-(tb.width/2);
 						}
 						if (v.follow.y) {
 							p.top = e.pageY-h-winST-9;
@@ -173,7 +184,7 @@
 					$(document).on('mousemove.tip', function(e) {
 						if (position == 'top' || position == 'bottom') {
 							if (v.follow.x) {
-								p.left = e.pageX-winSL-9;
+								p.left = align == 'right' ? e.pageX-winSL-9 : e.pageX-winSL-(tb.width/2);
 							}
 							if (v.follow.y) {
 								p.top = e.pageY-h-winST-9;
@@ -212,4 +223,4 @@
 		}
 	};
 
-})(jQuery);
+}));

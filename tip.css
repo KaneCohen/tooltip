@@ -45,7 +45,7 @@
 
 #tip.left .tipArrow {
 	top: 50%;
-	margin-top: -6px;
+	margin-top: -4px;
 	right: -4px;
 	border-width: 4px 0 4px 4px;
 	border-left-color: rgba(0,0,0,0.9);
@@ -53,7 +53,7 @@
 
 #tip.right .tipArrow {
 	top: 50%;
-	margin-top: -6px;
+	margin-top: -4px;
 	left: -4px;
 	border-width: 4px 4px 4px 0;
 	border-right-color: rgba(0,0,0,0.9);
