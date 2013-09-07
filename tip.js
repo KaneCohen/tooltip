@@ -1,5 +1,5 @@
 // Tiny simplistic tooltip plugin for jQuery
-// version 0.0.4
+// version 0.0.5
 // Kane Cohen [KaneCohen@gmail.com] | https://github.com/KaneCohen
 (function(factory) {
 	if (typeof define === 'function' && define.amd) {
@@ -108,11 +108,13 @@
 			if (tip !== null && tip.length !== 0) {
 				var template = $(self.o.tpl),
 				    arrow = template.find('.tipArrow'),
-				    winSL = $(window).scrollLeft(),
-				    winST = $(window).scrollTop(),
-				    winW  = $(window).width(),
-				    winH  = $(window).height(),
-				    b     = el[0].getBoundingClientRect();
+						win = {
+							left: $(window).scrollLeft(),
+							top: $(window).scrollTop(),
+							width: $(window).width(),
+							height: $(window).height(),
+						},
+				    b = el[0].getBoundingClientRect();
 
 				template.find('.tipContent').text(tip);
 				$('body').append(template);
@@ -120,8 +122,8 @@
 				var tb = template[0].getBoundingClientRect(),
 				    w  = tb.width,
 				    h  = tb.height,
-				    maxX = winW - w,
-				    maxY = winH - h;
+				    maxX = win.width - w,
+				    maxY = win.height - h;
 				template.css({
 					width: w,
 					height: h
@@ -164,41 +166,10 @@
 				template.addClass(position);
 
 				if (follow) {
-					if (position == 'top' || position == 'bottom') {
-						if (v.follow.x) {
-							p.left = align == 'right' ? e.pageX-winSL-9 : e.pageX-winSL-(tb.width/2);
-						}
-						if (v.follow.y) {
-							p.top = e.pageY-h-winST-9;
-							p.top += p.top < 0 ? h*2 : 0;
-						}
-					} else {
-						if (v.follow.x) {
-							p.left = e.pageX-winSL+9;
-						}
-						if (v.follow.y) {
-							p.top = e.pageY-(h/2)-winST+2;
-						}
-					}
+					p = this.calculatePos(position, p, tb, win, align, e);
 
 					$(document).on('mousemove.tip', function(e) {
-						if (position == 'top' || position == 'bottom') {
-							if (v.follow.x) {
-								p.left = align == 'right' ? e.pageX-winSL-9 : e.pageX-winSL-(tb.width/2);
-							}
-							if (v.follow.y) {
-								p.top = e.pageY-h-winST-9;
-								p.top += p.top < 0 ? h*2 : 0;
-							}
-						} else {
-							if (v.follow.x) {
-								p.left = e.pageX-winSL+9;
-							}
-							if (v.follow.y) {
-								p.top = e.pageY-(h/2)-winST+2;
-							}
-						}
-
+						p = self.calculatePos(position, p, tb, win, align, e);
 						template[0].style.left = p.left+'px';
 						template[0].style.top = p.top+'px';
 					});
@@ -206,6 +177,26 @@
 
 				template.css({left: p.left, top: p.top, visibility: 'visible'});
 			}
+		},
+
+		calculatePos: function(position, p, tb, win, align, e) {
+			if (position == 'top' || position == 'bottom') {
+				if (this.v.follow.x) {
+					p.left = align == 'right' ? e.pageX-win.left-9 : e.pageX-win.left-(tb.width/2);
+				}
+				if (this.v.follow.y) {
+					p.top = e.pageY-h-win.top-9;
+					p.top += p.top < 0 ? h*2 : 0;
+				}
+			} else {
+				if (v.follow.x) {
+					p.left = e.pageX-win.left+9;
+				}
+				if (v.follow.y) {
+					p.top = e.pageY-(h/2)-win.top+2;
+				}
+			}
+			return p;
 		},
 
 		destroy: function() {
