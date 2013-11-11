@@ -1,6 +1,9 @@
-// Tiny simplistic tooltip plugin for jQuery
-// version 0.1.0
-// Kane Cohen [KaneCohen@gmail.com] | https://github.com/KaneCohen
+/**
+ * Tiny simplistic tooltip plugin for jQuery
+ * version 0.1.0
+ * Kane Cohen [KaneCohen@gmail.com] | https://github.com/KaneCohen
+ * @preserve
+ */
 (function(factory) {
 	if (typeof define === 'function' && define.amd) {
 		define(['jquery'], factory);
