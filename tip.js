@@ -1,5 +1,5 @@
 // Tiny simplistic tooltip plugin for jQuery
-// version 0.0.5
+// version 0.1.0
 // Kane Cohen [KaneCohen@gmail.com] | https://github.com/KaneCohen
 (function(factory) {
 	if (typeof define === 'function' && define.amd) {
@@ -10,8 +10,9 @@
 }(function($) {
 	$.fn.tip = function(options) {
 		var args = arguments,
-		    o = $.extend(true, {}, options),
-		    tip = $(document).data('tip');
+		    o = $.extend(true, {}, options);
+
+		var tip = $(o.parent || document).data('tip');
 		o.selector = this.selector || '.tip';
 		if (tip) {
 			tip.trigger.apply(tip, args);
@@ -28,17 +29,18 @@
 	Tip.prototype = {
 		o: {},
 		d: {
+			parent:   null,   // Object to bind listeners to.
 			showTime: 200,
 			hideTime: 1000,
 			arrowSize: 5,
-			follow:   false,  // Follow mouse. Values: 'x', 'y', 'xy', false.
-			position: 'auto', // top, bottom, left, right, auto.
+			follow:   false,   // Follow mouse. Values: 'x', 'y', 'xy', false.
+			position: 'auto',  // top, bottom, left, right, auto.
 			align:    'right', // center, right
-			aside:    false,  // Place tooltip to the left/right based on "position" option. true, false.
+			aside:    false,   // Place tooltip to the left/right based on "position" option. true, false.
 			selector: '.tip',
 			tpl: '<div id="tip" style="visibility: hidden;">' +
-				'<div class="tipContent"></div>' +
-				'<i class="tipArrow"></i>' +
+				'<div class="content"></div>' +
+				'<i class="arrow"></i>' +
 			'</div>'
 		},
 		v: {},
@@ -54,13 +56,14 @@
 		init: function(o) {
 			this.o = $.extend({}, this.d, o);
 			this.v = $.extend({}, this.dv);
+			this.o.parent = o.parent || document;
 			this.initEvents();
-			$(document).data('tip', this);
+			$(this.o.parent).data('tip', this);
 		},
 
 		initEvents: function() {
 			var self = this;
-			$(document).on('mouseover.tip', this.o.selector, function(e) {
+			$(this.o.parent).on('mouseover.tip', this.o.selector, function(e) {
 				var el = $(this);
 				if (! el.data('tip') && el.attr('title')) {
 					el.attr('data-tip', $.trim(el.attr('title')));
@@ -79,8 +82,8 @@
 				}
 			});
 
-			$(document).on('mouseout.tip mousedown.tip', self.o.selector+', #tip', function(e) {
-				$(document).off('mousemove.tip');
+			$(this.o.parent).on('mouseout.tip mousedown.tip', self.o.selector+', #tip', function(e) {
+				$(self.o.parent).off('mousemove.tip');
 				$('#tip').remove();
 				clearTimeout(self.v.timer);
 				clearTimeout(self.v.enter);
@@ -107,16 +110,16 @@
 
 			if (tip !== null && tip.length !== 0) {
 				var template = $(self.o.tpl),
-				    arrow = template.find('.tipArrow'),
+				    arrow = template.find('.arrow'),
 						win = {
 							left: $(window).scrollLeft(),
 							top: $(window).scrollTop(),
 							width: $(window).width(),
-							height: $(window).height(),
+							height: $(window).height()
 						},
 				    b = el[0].getBoundingClientRect();
 
-				template.find('.tipContent').text(tip);
+				template.find('.content').text(tip);
 				$('body').append(template);
 
 				var tb = template[0].getBoundingClientRect(),
@@ -168,7 +171,7 @@
 				if (follow) {
 					p = this.calculatePos(position, p, tb, win, align, e);
 
-					$(document).on('mousemove.tip', function(e) {
+					$(this.o.parent).on('mousemove.tip', function(e) {
 						p = self.calculatePos(position, p, tb, win, align, e);
 						template[0].style.left = p.left+'px';
 						template[0].style.top = p.top+'px';
@@ -200,7 +203,7 @@
 		},
 
 		destroy: function() {
-			$(document).off('.tip');
+			$(this.o.parent).off('.tip');
 			$('#tip').remove();
 		},
 
