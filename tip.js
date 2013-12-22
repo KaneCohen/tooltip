@@ -85,7 +85,7 @@
 				}
 			});
 
-			$(this.o.parent).on('mouseout.tip mousedown.tip', self.o.selector+', #tip', function(e) {
+			$(this.o.parent).on('mouseout.tip mousedown.tip', self.o.selector+', #tip', function() {
 				$(self.o.parent).off('mousemove.tip');
 				$('#tip').remove();
 				clearTimeout(self.v.timer);
@@ -122,7 +122,7 @@
 						},
 				    b = el[0].getBoundingClientRect();
 
-				template.find('.content').text(tip);
+				template.find('.content').html(tip);
 				$('body').append(template);
 
 				var tb = template[0].getBoundingClientRect(),
