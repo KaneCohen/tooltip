@@ -192,7 +192,7 @@
 				}
 				if (this.v.follow.y) {
 					p.top = e.pageY - tb.height - win.top - 9;
-					p.top += p.top < 0 ? h*2 : 0;
+					p.top += p.top < 0 ? tb.height * 2 : 0;
 				}
 			} else {
 				if (v.follow.x) {
