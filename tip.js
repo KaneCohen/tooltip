@@ -1,6 +1,6 @@
 /**
  * Tiny simplistic tooltip plugin for jQuery
- * version 0.1.0
+ * version 0.1.1
  * Kane Cohen [KaneCohen@gmail.com] | https://github.com/KaneCohen
  * @preserve
  */
@@ -188,18 +188,18 @@
 		calculatePos: function(position, p, tb, win, align, e) {
 			if (position == 'top' || position == 'bottom') {
 				if (this.v.follow.x) {
-					p.left = align == 'right' ? e.pageX-win.left-9 : e.pageX-win.left-(tb.width/2);
+					p.left = align == 'right' ? (e.pageX - win.left - 9) : (e.pageX - win.left - (tb.width/2));
 				}
 				if (this.v.follow.y) {
-					p.top = e.pageY-h-win.top-9;
+					p.top = e.pageY - tb.height - win.top - 9;
 					p.top += p.top < 0 ? h*2 : 0;
 				}
 			} else {
 				if (v.follow.x) {
-					p.left = e.pageX-win.left+9;
+					p.left = e.pageX - win.left + 9;
 				}
 				if (v.follow.y) {
-					p.top = e.pageY-(h/2)-win.top+2;
+					p.top = e.pageY - (tb.height/2) - win.top + 2;
 				}
 			}
 			return p;
