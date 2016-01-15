@@ -1,6 +1,6 @@
 {
 	"name": "tooltip",
-	"version": "0.1.1",
+	"version": "0.2",
 	"description": "Tiny and simple jquery tooltip plugin",
 	"keywords": ["tooltip", "tip", "jquery", "plugin"],
 	"author": {
