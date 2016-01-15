@@ -1,6 +1,6 @@
 {
 	"name": "tooltip",
-	"version": "0.1.0",
+	"version": "0.2",
 	"description": "Tiny and simple jquery tooltip plugin",
 	"keywords": ["tooltip", "tip", "jquery", "plugin"],
 	"author": {
@@ -10,13 +10,8 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/KaneCohen/tooltip.git"
-	}
-	"licenses": [
-		{
-			"type": "BSD",
-			"url": "https://github.com/KaneCohen/tooltip/blob/master/LICENSE"
-		}
-	],
+	},
+	"license" : "SEE LICENSE IN https://github.com/KaneCohen/tooltip/blob/master/LICENSE",
 	"dependencies": {
 		"jquery": ">=1.9.0"
 	}
