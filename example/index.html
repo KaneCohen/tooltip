@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="../tip.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.0/jquery.js"></script>
+    <script src="../tip.js"></script>
+    <style>
+        body {
+            padding: 8px;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            line-height: 16px;
+            margin: 50px;
+        }
+
+        b {
+            color: #069;
+            cursor: pointer;
+        }
+
+        .xFollower {
+            float: left;
+            margin: 20px;
+            width: 100px;
+            height: 30px;
+            background: #ccc;
+            border-radius: 5px;
+            text-align: center;
+            color: #666;
+        }
+
+        .yFollower {
+            float: left;
+            margin:20px;
+            width: 40px;
+            height: 100px;
+            background: #ccc;
+            border-radius: 5px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <p>The ship of Theseus, also known as Theseus' <b class="tip" data-tip="A paradox is an argument that produces an inconsistency">paradox</b>, is a paradox that raises the question of whether an object which has had all its component parts replaced remains fundamentally the <b class="tip" data-tip="Relation each thing bears just to itself">same object</b>. The paradox is most notably recorded by Plutarch in Life of Theseus from the late 1st century. Plutarch asked whether a ship which was restored by replacing all its wooden parts, remained the same ship.</p>
+
+    <div class="tip xFollower" data-tip="I will follow on X axis" data-tip-follow="x">Hover over me</div>
+    <div class="tip yFollower" data-tip="I will follow on Y axis" data-tip-follow="y" data-tip-position="left">Hover over me</div>
+    <div class="tip yFollower" data-tip="I will follow on Y axis" data-tip-follow="y" data-tip-position="right">Hover over me</div>
+
+    <script>
+        $(document).ready(function() {
+        // Initilizing plugin
+            $().tip();
+        });
+    </script>
+</body>
+</html>
