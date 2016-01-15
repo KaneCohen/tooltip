@@ -1,18 +1,23 @@
 {
-	"name": "tooltip",
-	"version": "0.2",
-	"description": "Tiny and simple jquery tooltip plugin",
-	"keywords": ["tooltip", "tip", "jquery", "plugin"],
-	"author": {
-		"name": "Kane Cohen",
-		"email": "kanecohen@gmail.com"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/KaneCohen/tooltip.git"
-	},
-	"license" : "SEE LICENSE IN https://github.com/KaneCohen/tooltip/blob/master/LICENSE",
-	"dependencies": {
-		"jquery": ">=1.9.0"
-	}
+  "name": "tooltip",
+  "version": "0.2.1",
+  "description": "Tiny and simple jquery tooltip plugin",
+  "keywords": ["tooltip", "tip", "jquery", "plugin"],
+  "author": {
+    "name": "Kane Cohen",
+    "email": "kanecohen@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KaneCohen/tooltip.git"
+  },
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "jquery": ">=1.9.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-uglify": "~1.0.2",
+    "gulp-rename": "~1.2.0"
+  }
 }
